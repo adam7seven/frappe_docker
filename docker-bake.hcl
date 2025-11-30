@@ -16,16 +16,8 @@ variable "FRAPPE_VERSION" {
     default = "develop"
 }
 
-variable "ERPNEXT_VERSION" {
-    default = "develop"
-}
-
 variable "FRAPPE_REPO" {
-    default = "https://github.com/frappe/frappe"
-}
-
-variable "ERPNEXT_REPO" {
-    default = "https://github.com/frappe/erpnext"
+    default = "https://github.com/adam7seven/frappe"
 }
 
 variable "BENCH_REPO" {
@@ -59,13 +51,13 @@ target "bench-test" {
 # Base for all other targets
 
 group "default" {
-    targets = ["erpnext", "base", "build"]
+    targets = ["frappe", "base", "build"]
 }
 
 function "tag" {
     params = [repo, version]
     result = [
-      # Push frappe or erpnext branch as tag
+      # Push frappe branch as tag
       "${REGISTRY_USER}/${repo}:${version}",
       # If `version` param is develop (development build) then use tag `latest`
       "${version}" == "develop" ? "${REGISTRY_USER}/${repo}:latest" : "${REGISTRY_USER}/${repo}:${version}",
@@ -79,21 +71,19 @@ function "tag" {
 target "default-args" {
     args = {
         FRAPPE_PATH = "${FRAPPE_REPO}"
-        ERPNEXT_PATH = "${ERPNEXT_REPO}"
         BENCH_REPO = "${BENCH_REPO}"
         FRAPPE_BRANCH = "${FRAPPE_VERSION}"
-        ERPNEXT_BRANCH = "${ERPNEXT_VERSION}"
         PYTHON_VERSION = "${PYTHON_VERSION}"
         NODE_VERSION = "${NODE_VERSION}"
     }
 }
 
-target "erpnext" {
+target "frappe" {
     inherits = ["default-args"]
     context = "."
     dockerfile = "images/production/Containerfile"
-    target = "erpnext"
-    tags = tag("erpnext", "${ERPNEXT_VERSION}")
+    target = "frappe"
+    tags = tag("frappe", "${FRAPPE_VERSION}")
 }
 
 target "base" {
@@ -109,5 +99,5 @@ target "build" {
     context = "."
     dockerfile = "images/production/Containerfile"
     target = "build"
-    tags = tag("build", "${ERPNEXT_VERSION}")
+    tags = tag("build", "${FRAPPE_VERSION}")
 }

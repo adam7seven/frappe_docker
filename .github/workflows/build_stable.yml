@@ -24,7 +24,7 @@ on:
       - docker-bake.hcl
       - example.env
 
-  # Triggered from frappe/frappe and frappe/erpnext on releases
+  # Triggered from adam7seven/frappe on releases
   repository_dispatch:
 
   workflow_dispatch:
@@ -33,9 +33,9 @@ jobs:
   v14:
     uses: ./.github/workflows/docker-build-push.yml
     with:
-      repo: erpnext
+      repo: frappe
       version: "14"
-      push: ${{ github.repository == 'frappe/frappe_docker' && github.event_name != 'pull_request' }}
+      push: ${{ github.repository == 'adam7seven/frappe_docker' && github.event_name != 'pull_request' }}
       python_version: 3.10.13
       node_version: 16.20.2
     secrets:
@@ -45,9 +45,9 @@ jobs:
   v15:
     uses: ./.github/workflows/docker-build-push.yml
     with:
-      repo: erpnext
+      repo: frappe
       version: "15"
-      push: ${{ github.repository == 'frappe/frappe_docker' && github.event_name != 'pull_request' }}
+      push: ${{ github.repository == 'adam7seven/frappe_docker' && github.event_name != 'pull_request' }}
       python_version: 3.11.6
       node_version: 20.19.2
     secrets:
@@ -57,9 +57,9 @@ jobs:
   v16:
     uses: ./.github/workflows/docker-build-push.yml
     with:
-      repo: erpnext
+      repo: frappe
       version: "16"
-      push: ${{ github.repository == 'frappe/frappe_docker' && github.event_name != 'pull_request' }}
+      push: ${{ github.repository == 'adam7seven/frappe_docker' && github.event_name != 'pull_request' }}
       python_version: 3.12.12
       node_version: 22.21.1
     secrets:
@@ -69,7 +69,7 @@ jobs:
   update_versions:
     name: Update example.env and pwd.yml
     runs-on: ubuntu-latest
-    if: ${{ github.repository == 'frappe/frappe_docker' && github.event_name != 'pull_request' }}
+    if: ${{ github.repository == 'adam7seven/frappe_docker' && github.event_name != 'pull_request' }}
     needs: v15
 
     steps:
@@ -82,7 +82,7 @@ jobs:
           python-version: "3.10"
 
       - name: Get latest versions
-        run: python3 ./.github/scripts/get_latest_tags.py --repo erpnext --version 15
+        run: python3 ./.github/scripts/get_latest_tags.py --repo frappe --version 15
 
       - name: Update
         run: |
@@ -107,7 +107,7 @@ jobs:
   release_helm:
     name: Release Helm
     runs-on: ubuntu-latest
-    if: ${{ github.repository == 'frappe/frappe_docker' && github.event_name != 'pull_request' }}
+    if: ${{ github.repository == 'adam7seven/frappe_docker' && github.event_name != 'pull_request' }}
     needs: v15
 
     steps:

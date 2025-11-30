@@ -28,7 +28,7 @@ def _add_sites_var(env_path: Path):
         content = f.read()
         content = re.sub(
             rf"SITES=.*",
-            f"SITES=`tests.localhost`,`test-erpnext-site.localhost`,`test-pg-site.localhost`",
+            f"SITES=`tests.localhost`,`test-frappe-site.localhost`,`test-pg-site.localhost`",
             content,
         )
         f.seek(0)
@@ -44,7 +44,7 @@ def env_file(tmp_path_factory: pytest.TempPathFactory):
 
     _add_sites_var(file_path)
 
-    for var in ("FRAPPE_VERSION", "ERPNEXT_VERSION"):
+    for var in "FRAPPE_VERSION":
         _add_version_var(name=var, env_path=file_path)
 
     yield str(file_path)
@@ -72,37 +72,12 @@ def frappe_site(compose: Compose):
     compose.bench(
         "new-site",
         # TODO: change to --mariadb-user-host-login-scope=%
-        "--no-mariadb-socket",
+        "--db-type=postgres",
+        "--db-root-username=root",
         "--db-root-password=123",
         "--admin-password=admin",
         site_name,
     )
-    compose("restart", "backend")
-    yield site_name
-
-
-@pytest.fixture(scope="class")
-def erpnext_setup(compose: Compose):
-    compose.stop()
-    compose("up", "-d", "--quiet-pull")
-
-    yield
-    compose.stop()
-
-
-@pytest.fixture(scope="class")
-def erpnext_site(compose: Compose):
-    site_name = "test-erpnext-site.localhost"
-    args = [
-        "new-site",
-        # TODO: change to --mariadb-user-host-login-scope=%
-        "--no-mariadb-socket",
-        "--db-root-password=123",
-        "--admin-password=admin",
-        "--install-app=erpnext",
-        site_name,
-    ]
-    compose.bench(*args)
     compose("restart", "backend")
     yield site_name
 

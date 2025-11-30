@@ -64,8 +64,8 @@ def get_args_parser():
         "--frappe-repo",
         action="store",
         type=str,
-        help="frappe repo to use, default: https://github.com/frappe/frappe",  # noqa: E501
-        default="https://github.com/frappe/frappe",
+        help="frappe repo to use, default: https://github.com/adam7seven/frappe",  # noqa: E501
+        default="https://github.com/adam7seven/frappe",
     )
     parser.add_argument(
         "-t",
