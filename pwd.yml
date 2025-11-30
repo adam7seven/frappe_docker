@@ -76,7 +76,7 @@ services:
           fi
         done;
         echo "sites/common_site_config.json found";
-        bench new-site --db-type postgres --admin-password=admin --db-root-username=root --db-root-password=admin --set-default frontend;
+        bench new-site --db-type postgres --admin-password=admin --db-root-username=postgres --db-root-password=admin --set-default frontend;
 
   db:
     image: postgres:14

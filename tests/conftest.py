@@ -73,7 +73,7 @@ def frappe_site(compose: Compose):
         "new-site",
         # TODO: change to --mariadb-user-host-login-scope=%
         "--db-type=postgres",
-        "--db-root-username=root",
+        "--db-root-username=postgres",
         "--db-root-password=123",
         "--admin-password=admin",
         site_name,
