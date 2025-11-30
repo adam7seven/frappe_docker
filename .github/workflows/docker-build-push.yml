@@ -71,7 +71,7 @@ jobs:
           source: .
           push: true
         env:
-          REGISTRY_USER: localhost:5000/frappe
+          REGISTRY_USER: localhost:5000/adam7
 
       - name: Setup Python
         uses: actions/setup-python@v6
