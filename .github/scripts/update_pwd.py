@@ -11,9 +11,7 @@ def get_versions():
 def update_pwd(frappe_version: str):
     with open("pwd.yml", "r+") as f:
         content = f.read()
-        content = re.sub(
-            rf"adam7/frappe:.*", f"adam7/frappe:{frappe_version}", content
-        )
+        content = re.sub(rf"adam7/frappe:.*", f"adam7/frappe:{frappe_version}", content)
         f.seek(0)
         f.truncate()
         f.write(content)
