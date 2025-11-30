@@ -30,7 +30,7 @@ class Compose:
             "-f",
             "overrides/compose.proxy.yaml",
             "-f",
-            "overrides/compose.mariadb.yaml",
+            "overrides/compose.postgres.yaml",
             "-f",
             "overrides/compose.redis.yaml",
         ]
