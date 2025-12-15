@@ -30,18 +30,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  v14:
-    uses: ./.github/workflows/docker-build-push.yml
-    with:
-      repo: frappe
-      version: "14"
-      push: ${{ github.repository == 'adam7seven/frappe_docker' && github.event_name != 'pull_request' }}
-      python_version: 3.10.13
-      node_version: 16.20.2
-    secrets:
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-
   v15:
     uses: ./.github/workflows/docker-build-push.yml
     with:
@@ -50,9 +38,10 @@ jobs:
       push: ${{ github.repository == 'adam7seven/frappe_docker' && github.event_name != 'pull_request' }}
       python_version: 3.11.6
       node_version: 20.19.2
+      registry_url: "registry.adam7.top:81"
     secrets:
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+      DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
 
   v16:
     uses: ./.github/workflows/docker-build-push.yml
@@ -62,9 +51,10 @@ jobs:
       push: ${{ github.repository == 'adam7seven/frappe_docker' && github.event_name != 'pull_request' }}
       python_version: 3.12.12
       node_version: 22.21.1
+      registry_url: "registry.adam7.top:81"
     secrets:
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+      DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
 
   update_versions:
     name: Update example.env and pwd.yml
