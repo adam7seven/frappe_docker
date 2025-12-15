@@ -104,7 +104,5 @@ jobs:
         uses: docker/bake-action@v6.9.0
         with:
           push: true
-          set: |
-            "*.platform=linux/amd64"
-            "*.registry=${{ inputs.registry_url }}"
+          set: "*.platform=linux/amd64"
           # set: "*.platform=linux/amd64,linux/arm64"
