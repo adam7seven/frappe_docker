@@ -9,7 +9,7 @@ import sys
 from typing import Literal
 
 Repo = Literal["frappe"]
-MajorVersion = Literal["12", "13", "14", "15", "16", "develop"]
+MajorVersion = Literal["15", "16", "develop"]
 
 
 def get_latest_tag(repo: Repo, version: MajorVersion) -> str:

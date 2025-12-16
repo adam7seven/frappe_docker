@@ -2,7 +2,7 @@
 # Reference: https://github.com/docker/buildx/blob/master/docs/reference/buildx_bake.md
 
 variable "REGISTRY_USER" {
-    default = "adam7"
+    default = "registry.adam7.top:81"
 }
 
 variable PYTHON_VERSION {
