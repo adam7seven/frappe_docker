@@ -38,7 +38,7 @@ jobs:
       push: ${{ github.repository == 'adam7seven/frappe_docker' && github.event_name != 'pull_request' }}
       python_version: 3.11.6
       node_version: 20.19.2
-      registry_url: "registry.adam7.top:81"
+      registry_url: "registry.adam7.top"
     secrets:
       DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
       DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
@@ -51,7 +51,7 @@ jobs:
       push: ${{ github.repository == 'adam7seven/frappe_docker' && github.event_name != 'pull_request' }}
       python_version: 3.12.12
       node_version: 22.21.1
-      registry_url: "registry.adam7.top:81"
+      registry_url: "registry.adam7.top"
     secrets:
       DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
       DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
