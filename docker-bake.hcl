@@ -2,7 +2,7 @@
 # Reference: https://github.com/docker/buildx/blob/master/docs/reference/buildx_bake.md
 
 variable "REGISTRY_USER" {
-    default = "frappe"
+    default = "adam7"
 }
 
 variable PYTHON_VERSION {
@@ -21,7 +21,7 @@ variable "ERPNEXT_VERSION" {
 }
 
 variable "FRAPPE_REPO" {
-    default = "https://github.com/frappe/frappe"
+    default = "https://github.com/adam7seven/frappe"
 }
 
 variable "ERPNEXT_REPO" {
@@ -88,20 +88,12 @@ target "default-args" {
     }
 }
 
-target "erpnext" {
-    inherits = ["default-args"]
-    context = "."
-    dockerfile = "images/production/Containerfile"
-    target = "erpnext"
-    tags = tag("erpnext", "${ERPNEXT_VERSION}")
-}
-
 target "base" {
     inherits = ["default-args"]
     context = "."
     dockerfile = "images/production/Containerfile"
     target = "base"
-    tags = tag("base", "${FRAPPE_VERSION}")
+    tags = tag("frappe-base", "${FRAPPE_VERSION}")
 }
 
 target "build" {
@@ -109,5 +101,5 @@ target "build" {
     context = "."
     dockerfile = "images/production/Containerfile"
     target = "build"
-    tags = tag("build", "${ERPNEXT_VERSION}")
+    tags = tag("frappe-build", "${ERPNEXT_VERSION}")
 }

@@ -25,7 +25,7 @@ jobs:
     with:
       repo: erpnext
       version: develop
-      push: ${{ github.repository == 'frappe/frappe_docker' && github.event_name != 'pull_request' }}
+      push: ${{ github.repository == 'adam7seven/frappe_docker' && github.event_name != 'pull_request' }}
       python_version: 3.14.2
       node_version: 24.12.0
     secrets:
