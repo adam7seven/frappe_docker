@@ -39,7 +39,8 @@ jobs:
           - 5000:5000
     strategy:
       matrix:
-        arch: [amd64, arm64]
+        arch: [amd64]
+        # arch: [amd64, arm64]
 
     steps:
       - name: Checkout
@@ -98,4 +99,5 @@ jobs:
         uses: docker/bake-action@v6.10.0
         with:
           push: true
-          set: "*.platform=linux/amd64,linux/arm64"
+          set: "*.platform=linux/amd64"
+          # set: "*.platform=linux/amd64,linux/arm64"
