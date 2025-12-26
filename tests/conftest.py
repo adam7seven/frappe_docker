@@ -28,7 +28,7 @@ def _add_sites_var(env_path: Path):
         content = f.read()
         content = re.sub(
             rf"SITES=.*",
-            f"SITES=`tests.localhost`,`test-erpnext-site.localhost`,`test-pg-site.localhost`",
+            f"SITES=`tests.localhost`,`test-pg-site.localhost`",
             content,
         )
         f.seek(0)
@@ -78,32 +78,6 @@ def frappe_site(compose: Compose):
         "--admin-password=admin",
         site_name,
     )
-    compose("restart", "backend")
-    yield site_name
-
-
-@pytest.fixture(scope="class")
-def erpnext_setup(compose: Compose):
-    compose.stop()
-    compose("up", "-d", "--quiet-pull")
-
-    yield
-    compose.stop()
-
-
-@pytest.fixture(scope="class")
-def erpnext_site(compose: Compose):
-    site_name = "test-erpnext-site.localhost"
-    args = [
-        "new-site",
-        # TODO: change to --mariadb-user-host-login-scope=%
-        "--no-mariadb-socket",
-        "--db-root-password=123",
-        "--admin-password=admin",
-        "--install-app=erpnext",
-        site_name,
-    ]
-    compose.bench(*args)
     compose("restart", "backend")
     yield site_name
 
