@@ -72,7 +72,8 @@ def frappe_site(compose: Compose):
     compose.bench(
         "new-site",
         # TODO: change to --mariadb-user-host-login-scope=%
-        "--no-mariadb-socket",
+        "--db-type=postgres",
+        "--db-root-username=postgres",
         "--db-root-password=123",
         "--admin-password=admin",
         site_name,
