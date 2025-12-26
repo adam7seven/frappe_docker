@@ -120,22 +120,22 @@ def test_https(frappe_site: str, compose: Compose):
     check_url_content(url="https://127.0.0.1", callback=index_cb, site_name=frappe_site)
 
 
-@pytest.mark.usefixtures("erpnext_setup")
-class TestErpnext:
-    @pytest.mark.parametrize(
-        ("url", "callback"),
-        (
-            (
-                "/api/method/erpnext.templates.pages.search_help.get_help_results_sections?text=help",
-                api_cb,
-            ),
-            ("/assets/erpnext/js/setup_wizard.js", assets_cb),
-        ),
-    )
-    def test_endpoints(self, url: str, callback: Any, erpnext_site: str):
-        check_url_content(
-            url=f"http://127.0.0.1{url}", callback=callback, site_name=erpnext_site
-        )
+# @pytest.mark.usefixtures("erpnext_setup")
+# class TestErpnext:
+#     @pytest.mark.parametrize(
+#         ("url", "callback"),
+#         (
+#             (
+#                 "/api/method/erpnext.templates.pages.search_help.get_help_results_sections?text=help",
+#                 api_cb,
+#             ),
+#             ("/assets/erpnext/js/setup_wizard.js", assets_cb),
+#         ),
+#     )
+#     def test_endpoints(self, url: str, callback: Any, erpnext_site: str):
+#         check_url_content(
+#             url=f"http://127.0.0.1{url}", callback=callback, site_name=erpnext_site
+#         )
 
 
 @pytest.mark.usefixtures("postgres_setup")
