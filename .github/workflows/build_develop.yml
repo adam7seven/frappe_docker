@@ -23,7 +23,7 @@ jobs:
   build:
     uses: ./.github/workflows/docker-build-push.yml
     with:
-      repo: erpnext
+      repo: frappe
       version: develop
       push: ${{ github.repository == 'adam7seven/frappe_docker' && github.event_name != 'pull_request' }}
       python_version: 3.14.2

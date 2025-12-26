@@ -59,7 +59,7 @@ target "bench-test" {
 # Base for all other targets
 
 group "default" {
-    targets = ["base", "build"]
+    targets = ["frappe", "base", "build"]
 }
 
 function "tag" {
@@ -88,6 +88,14 @@ target "default-args" {
     }
 }
 
+target "frappe" {
+    inherits = ["default-args"]
+    context = "."
+    dockerfile = "images/production/Containerfile"
+    target = "frappe"
+    tags = tag("frappe", "${FRAPPE_VERSION}")
+}
+
 target "base" {
     inherits = ["default-args"]
     context = "."
@@ -101,5 +109,5 @@ target "build" {
     context = "."
     dockerfile = "images/production/Containerfile"
     target = "build"
-    tags = tag("frappe-build", "${ERPNEXT_VERSION}")
+    tags = tag("frappe-build", "${FRAPPE_VERSION}")
 }
