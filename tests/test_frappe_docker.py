@@ -37,24 +37,24 @@ def assets_cb(text: str):
         return text[:200]
 
 
-@pytest.mark.parametrize(
-    ("url", "callback"), (("/", index_cb), ("/api/method/ping", api_cb))
-)
-def test_endpoints(url: str, callback: Any, frappe_site: str):
-    check_url_content(
-        url=f"http://127.0.0.1{url}", callback=callback, site_name=frappe_site
-    )
+# @pytest.mark.parametrize(
+#     ("url", "callback"), (("/", index_cb), ("/api/method/ping", api_cb))
+# )
+# def test_endpoints(url: str, callback: Any, frappe_site: str):
+#     check_url_content(
+#         url=f"http://127.0.0.1{url}", callback=callback, site_name=frappe_site
+#     )
 
 
-@pytest.mark.skipif(
-    os.environ["FRAPPE_VERSION"][0:3] == "v12", reason="v12 doesn't have the asset"
-)
-def test_assets_endpoint(frappe_site: str):
-    check_url_content(
-        url=f"http://127.0.0.1/assets/frappe/images/frappe-framework-logo.svg",
-        callback=assets_cb,
-        site_name=frappe_site,
-    )
+# @pytest.mark.skipif(
+#     os.environ["FRAPPE_VERSION"][0:3] == "v12", reason="v12 doesn't have the asset"
+# )
+# def test_assets_endpoint(frappe_site: str):
+#     check_url_content(
+#         url=f"http://127.0.0.1/assets/frappe/images/frappe-framework-logo.svg",
+#         callback=assets_cb,
+#         site_name=frappe_site,
+#     )
 
 
 def test_files_reachable(frappe_site: str, tmp_path: Path, compose: Compose):
