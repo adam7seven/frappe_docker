@@ -6,7 +6,7 @@ on:
       repo:
         required: true
         type: string
-        description: "'erpnext' or 'frappe'"
+        description: "'frappe'"
       version:
         required: true
         type: string

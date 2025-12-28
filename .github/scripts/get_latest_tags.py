@@ -8,8 +8,8 @@ import subprocess
 import sys
 from typing import Literal
 
-Repo = Literal["frappe", "erpnext"]
-MajorVersion = Literal["12", "13", "14", "15", "16", "develop"]
+Repo = Literal["frappe"]
+MajorVersion = Literal["15", "16", "develop"]
 
 
 def get_latest_tag(repo: Repo, version: MajorVersion) -> str:
@@ -40,37 +40,31 @@ def get_latest_tag(repo: Repo, version: MajorVersion) -> str:
     return matches[0]
 
 
-def update_env(file_name: str, frappe_tag: str, erpnext_tag: str | None = None):
+def update_env(file_name: str, frappe_tag: str):
     text = f"\nFRAPPE_VERSION={frappe_tag}"
-    if erpnext_tag:
-        text += f"\nERPNEXT_VERSION={erpnext_tag}"
 
     with open(file_name, "a") as f:
         f.write(text)
 
 
-def _print_resp(frappe_tag: str, erpnext_tag: str | None = None):
-    print(json.dumps({"frappe": frappe_tag, "erpnext": erpnext_tag}))
+def _print_resp(frappe_tag: str):
+    print(json.dumps({"frappe": frappe_tag}))
 
 
 def main(_args: list[str]) -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--repo", choices=["frappe", "erpnext"], required=True)
+    parser.add_argument("--repo", choices=["frappe"], required=True)
     parser.add_argument(
         "--version", choices=["12", "13", "14", "15", "16", "develop"], required=True
     )
     args = parser.parse_args(_args)
 
     frappe_tag = get_latest_tag("frappe", args.version)
-    if args.repo == "erpnext":
-        erpnext_tag = get_latest_tag("erpnext", args.version)
-    else:
-        erpnext_tag = None
 
     file_name = os.getenv("GITHUB_ENV")
     if file_name:
-        update_env(file_name, frappe_tag, erpnext_tag)
-    _print_resp(frappe_tag, erpnext_tag)
+        update_env(file_name, frappe_tag)
+    _print_resp(frappe_tag)
     return 0
 
 

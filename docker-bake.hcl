@@ -16,16 +16,8 @@ variable "FRAPPE_VERSION" {
     default = "develop"
 }
 
-variable "ERPNEXT_VERSION" {
-    default = "develop"
-}
-
 variable "FRAPPE_REPO" {
     default = "https://github.com/adam7seven/frappe"
-}
-
-variable "ERPNEXT_REPO" {
-    default = "https://github.com/frappe/erpnext"
 }
 
 variable "BENCH_REPO" {
@@ -65,7 +57,7 @@ group "default" {
 function "tag" {
     params = [repo, version]
     result = [
-      # Push frappe or erpnext branch as tag
+      # Push frappe branch as tag
       "${REGISTRY_USER}/${repo}:${version}",
       # If `version` param is develop (development build) then use tag `latest`
       "${version}" == "develop" ? "${REGISTRY_USER}/${repo}:latest" : "${REGISTRY_USER}/${repo}:${version}",
@@ -79,10 +71,8 @@ function "tag" {
 target "default-args" {
     args = {
         FRAPPE_PATH = "${FRAPPE_REPO}"
-        ERPNEXT_PATH = "${ERPNEXT_REPO}"
         BENCH_REPO = "${BENCH_REPO}"
         FRAPPE_BRANCH = "${FRAPPE_VERSION}"
-        ERPNEXT_BRANCH = "${ERPNEXT_VERSION}"
         PYTHON_VERSION = "${PYTHON_VERSION}"
         NODE_VERSION = "${NODE_VERSION}"
     }

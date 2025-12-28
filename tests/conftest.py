@@ -44,8 +44,7 @@ def env_file(tmp_path_factory: pytest.TempPathFactory):
 
     _add_sites_var(file_path)
 
-    for var in ("FRAPPE_VERSION", "ERPNEXT_VERSION"):
-        _add_version_var(name=var, env_path=file_path)
+    _add_version_var(name="FRAPPE_VERSION", env_path=file_path)
 
     yield str(file_path)
     os.remove(file_path)

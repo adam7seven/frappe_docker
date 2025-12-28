@@ -1,6 +1,6 @@
 services:
   backend:
-    image: adam7/frappe:v15.93.0
+    image: adam7/frappe:v15.90.1
     networks:
       - frappe_network
     deploy:
@@ -15,7 +15,7 @@ services:
       POSTGRES_PASSWORD: admin
 
   configurator:
-    image: adam7/frappe:v15.93.0
+    image: adam7/frappe:v15.90.1
     networks:
       - frappe_network
     deploy:
@@ -44,7 +44,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   create-site:
-    image: adam7/frappe:v15.93.0
+    image: adam7/frappe:v15.90.1
     networks:
       - frappe_network
     deploy:
@@ -115,7 +115,7 @@ services:
   #     - db-data:/var/lib/mysql
 
   frontend:
-    image: adam7/frappe:v15.93.0
+    image: adam7/frappe:v15.90.1
     networks:
       - frappe_network
     depends_on:
@@ -141,7 +141,7 @@ services:
       - "8080:8080"
 
   queue-long:
-    image: adam7/frappe:v15.93.0
+    image: adam7/frappe:v15.90.1
     networks:
       - frappe_network
     deploy:
@@ -160,7 +160,7 @@ services:
       FRAPPE_REDIS_QUEUE: redis://redis-queue:6379
 
   queue-short:
-    image: adam7/frappe:v15.93.0
+    image: adam7/frappe:v15.90.1
     networks:
       - frappe_network
     deploy:
@@ -197,7 +197,7 @@ services:
         condition: on-failure
 
   scheduler:
-    image: adam7/frappe:v15.93.0
+    image: adam7/frappe:v15.90.1
     networks:
       - frappe_network
     deploy:
@@ -211,7 +211,7 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   websocket:
-    image: adam7/frappe:v15.93.0
+    image: adam7/frappe:v15.90.1
     networks:
       - frappe_network
     deploy:

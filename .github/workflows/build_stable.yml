@@ -24,7 +24,7 @@ on:
       - docker-bake.hcl
       - example.env
 
-  # Triggered from adam7seven/frappe and frappe/erpnext on releases
+  # Triggered from frappe/frappe on releases
   repository_dispatch:
 
   workflow_dispatch:
@@ -48,8 +48,8 @@ jobs:
       repo: frappe
       version: "16"
       push: ${{ github.repository == 'adam7seven/frappe_docker' && github.event_name != 'pull_request' }}
-      python_version: 3.11.6
-      node_version: 20.19.2
+      python_version: 3.12.12
+      node_version: 22.21.1
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -70,7 +70,7 @@ jobs:
           python-version: "3.10"
 
       - name: Get latest versions
-        run: python3 ./.github/scripts/get_latest_tags.py --repo erpnext --version 15
+        run: python3 ./.github/scripts/get_latest_tags.py --repo frappe --version 15
 
       - name: Update
         run: |
