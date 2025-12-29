@@ -37,48 +37,48 @@ def assets_cb(text: str):
         return text[:200]
 
 
-# @pytest.mark.parametrize(
-#     ("url", "callback"), (("/", index_cb), ("/api/method/ping", api_cb))
-# )
-# def test_endpoints(url: str, callback: Any, frappe_site: str):
-#     check_url_content(
-#         url=f"http://127.0.0.1{url}", callback=callback, site_name=frappe_site
-#     )
+@pytest.mark.parametrize(
+    ("url", "callback"), (("/", index_cb), ("/api/method/ping", api_cb))
+)
+def test_endpoints(url: str, callback: Any, frappe_site: str):
+    check_url_content(
+        url=f"http://127.0.0.1{url}", callback=callback, site_name=frappe_site
+    )
 
 
-# @pytest.mark.skipif(
-#     os.environ["FRAPPE_VERSION"][0:3] == "v12", reason="v12 doesn't have the asset"
-# )
-# def test_assets_endpoint(frappe_site: str):
-#     check_url_content(
-#         url=f"http://127.0.0.1/assets/frappe/images/frappe-framework-logo.svg",
-#         callback=assets_cb,
-#         site_name=frappe_site,
-#     )
+@pytest.mark.skipif(
+    os.environ["FRAPPE_VERSION"][0:3] == "v12", reason="v12 doesn't have the asset"
+)
+def test_assets_endpoint(frappe_site: str):
+    check_url_content(
+        url=f"http://127.0.0.1/assets/frappe/images/frappe-framework-logo.svg",
+        callback=assets_cb,
+        site_name=frappe_site,
+    )
 
 
-# def test_files_reachable(frappe_site: str, tmp_path: Path, compose: Compose):
-#     content = "lalala\n"
-#     file_path = tmp_path / "testfile.txt"
+def test_files_reachable(frappe_site: str, tmp_path: Path, compose: Compose):
+    content = "lalala\n"
+    file_path = tmp_path / "testfile.txt"
 
-#     with file_path.open("w") as f:
-#         f.write(content)
+    with file_path.open("w") as f:
+        f.write(content)
 
-#     compose(
-#         "cp",
-#         str(file_path),
-#         f"backend:/home/frappe/frappe-bench/sites/{frappe_site}/public/files/",
-#     )
+    compose(
+        "cp",
+        str(file_path),
+        f"backend:/home/frappe/frappe-bench/sites/{frappe_site}/public/files/",
+    )
 
-#     def callback(text: str):
-#         if text == content:
-#             return text
+    def callback(text: str):
+        if text == content:
+            return text
 
-#     check_url_content(
-#         url=f"http://127.0.0.1/files/{file_path.name}",
-#         callback=callback,
-#         site_name=frappe_site,
-#     )
+    check_url_content(
+        url=f"http://127.0.0.1/files/{file_path.name}",
+        callback=callback,
+        site_name=frappe_site,
+    )
 
 
 @pytest.mark.parametrize("service", BACKEND_SERVICES)
@@ -115,9 +115,9 @@ def test_push_backup(
     compose.exec(*restic_args, "backend", "restic", "snapshots")
 
 
-# def test_https(frappe_site: str, compose: Compose):
-#     compose("-f", "overrides/compose.https.yaml", "up", "-d")
-#     check_url_content(url="https://127.0.0.1", callback=index_cb, site_name=frappe_site)
+def test_https(frappe_site: str, compose: Compose):
+    compose("-f", "overrides/compose.https.yaml", "up", "-d")
+    check_url_content(url="https://127.0.0.1", callback=index_cb, site_name=frappe_site)
 
 
 @pytest.mark.usefixtures("postgres_setup")
