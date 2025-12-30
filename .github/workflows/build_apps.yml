@@ -28,11 +28,11 @@ jobs:
           context: .
           file: images/layered/Containerfile
           push: true
-          # 使用 build-args 传递你指定的参数
+          # 使用 build-args 传递你指定的参数, 接收来自 client_payload 的 Base64 字符串
           build-args: |
             FRAPPE_PATH=https://github.com/adam7seven/frappe
             FRAPPE_BRANCH=develop
-            APPS_JSON_BASE64=${{ github.event.client_payload.apps_json_base64 }}# 接收来自 client_payload 的 Base64 字符串
+            APPS_JSON_BASE64=${{ github.event.client_payload.apps_json_base64 }}
           # 镜像标签
           tags: adam7/${{github.event.client_payload.app_name}}:develop
           # 利用缓存加速后续构建
