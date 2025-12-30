@@ -6,7 +6,7 @@ on:
       repo:
         required: true
         type: string
-        description: "'erpnext' or 'frappe'"
+        description: "'frappe'"
       version:
         required: true
         type: string
@@ -39,7 +39,8 @@ jobs:
           - 5000:5000
     strategy:
       matrix:
-        arch: [amd64, arm64]
+        arch: [amd64]
+        # arch: [amd64, arm64]
 
     steps:
       - name: Checkout
@@ -71,7 +72,7 @@ jobs:
           source: .
           push: true
         env:
-          REGISTRY_USER: localhost:5000/frappe
+          REGISTRY_USER: localhost:5000/adam7
 
       - name: Setup Python
         uses: actions/setup-python@v6
@@ -98,4 +99,5 @@ jobs:
         uses: docker/bake-action@v6.10.0
         with:
           push: true
-          set: "*.platform=linux/amd64,linux/arm64"
+          set: "*.platform=linux/amd64"
+          # set: "*.platform=linux/amd64,linux/arm64"

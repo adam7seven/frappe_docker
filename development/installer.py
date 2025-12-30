@@ -64,8 +64,8 @@ def get_args_parser():
         "--frappe-repo",
         action="store",
         type=str,
-        help="frappe repo to use, default: https://github.com/frappe/frappe",  # noqa: E501
-        default="https://github.com/frappe/frappe",
+        help="frappe repo to use, default: https://github.com/adam7seven/frappe",  # noqa: E501
+        default="https://github.com/adam7seven/frappe",
     )
     parser.add_argument(
         "-t",
@@ -223,7 +223,7 @@ def create_site_in_bench(args):
         new_site_cmd = [
             "bench",
             "new-site",
-            f"--db-root-username=root",
+            f"--db-root-username=postgres",
             f"--db-host=postgresql",  # Should match the compose service name
             f"--db-type={args.db_type}",  # Add the selected database type
             f"--db-root-password=123",  # Replace with your PostgreSQL password
