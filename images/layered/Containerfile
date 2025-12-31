@@ -5,6 +5,7 @@ FROM adam7/frappe-build:${FRAPPE_BRANCH} AS builder
 ARG FRAPPE_BRANCH=version-15
 ARG FRAPPE_PATH=https://github.com/adam7seven/frappe
 ARG APPS_JSON_BASE64
+ARG GIT_AUTH_TOKEN
 
 USER root
 
@@ -13,6 +14,11 @@ RUN if [ -n "${APPS_JSON_BASE64}" ]; then \
   fi
 
 USER frappe
+
+# 在运行 bench init 之前添加这段 Git 配置
+RUN if [ -n "${GIT_AUTH_TOKEN}" ]; then \
+    git config --global url."https://${GIT_AUTH_TOKEN}@github.com/".insteadOf "https://github.com/"; \
+fi
 
 RUN export APP_INSTALL_ARGS="" && \
   if [ -n "${APPS_JSON_BASE64}" ]; then \
