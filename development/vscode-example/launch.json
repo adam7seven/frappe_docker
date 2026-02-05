@@ -18,6 +18,7 @@
         "--nothreading"
       ],
       "cwd": "${workspaceFolder}/frappe-bench/sites",
+      "python": "${workspaceFolder}/frappe-bench/env/bin/python",
       "env": {
         "DEV_SERVER": "1"
       }
