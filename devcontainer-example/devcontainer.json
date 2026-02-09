@@ -9,7 +9,8 @@
         "ms-vscode.live-server",
         "grapecity.gc-excelviewer",
         "mtxr.sqltools",
-        "mtxr.sqltools-driver-mysql"
+        "mtxr.sqltools-driver-pg",
+        "WeinanShi.unicodepreview"
       ],
       "settings": {
         "terminal.integrated.profiles.linux": {
@@ -21,19 +22,27 @@
         "debug.node.autoAttach": "disabled",
         "sqltools.connections": [
           {
-            "mysqlOptions": {
-              "authProtocol": "default",
-              "enableSsl": "Disabled"
-            },
-            "ssh": "Disabled",
+            // "mysqlOptions": {
+            //   "authProtocol": "default",
+            //   "enableSsl": "Disabled"
+            // },
+            // "ssh": "Disabled",
+            // "previewLimit": 50,
+            // "server": "mariadb",
+            // "port": 3306,
+            // "driver": "MariaDB",
+            // "name": "MariaDB",
+            // "username": "root",
+            // "password": "123",
+            // "database": "mysql"
             "previewLimit": 50,
-            "server": "mariadb",
-            "port": 3306,
-            "driver": "MariaDB",
-            "name": "MariaDB",
-            "username": "root",
+            "driver": "PostgreSQL", // 改为 PostgreSQL
+            "name": "Postgres-Dev",
+            "server": "postgresql", // 对应 compose 里的服务名
+            "port": 5432,
+            "username": "postgres",
             "password": "123",
-            "database": "mysql"
+            "database": "_2bb5c58493a344cf"
           }
         ]
       }
