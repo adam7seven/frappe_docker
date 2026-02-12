@@ -12,7 +12,8 @@
         "mtxr.sqltools-driver-pg",
         "charliermarsh.ruff",
         "WeinanShi.unicodepreview",
-        "Redis.redis-for-vscode"
+        "Redis.redis-for-vscode",
+        "EditorConfig.EditorConfig"
       ],
       "settings": {
         "terminal.integrated.profiles.linux": {
@@ -44,7 +45,7 @@
             "port": 5432,
             "username": "postgres",
             "password": "123",
-            "database": "_2bb5c58493a344cf"
+            "database": "development"
           }
         ]
       }
