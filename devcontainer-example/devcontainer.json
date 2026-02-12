@@ -10,7 +10,9 @@
         "grapecity.gc-excelviewer",
         "mtxr.sqltools",
         "mtxr.sqltools-driver-pg",
-        "WeinanShi.unicodepreview"
+        "charliermarsh.ruff",
+        "WeinanShi.unicodepreview",
+        "Redis.redis-for-vscode"
       ],
       "settings": {
         "terminal.integrated.profiles.linux": {
